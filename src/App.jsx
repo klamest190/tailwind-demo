@@ -1,6 +1,15 @@
 import Navbar from "./components/Navbar";
 import { motion } from "framer-motion";
-import { Bell, Rocket } from "lucide-react";
+import {
+  Bell,
+  Rocket,
+  Workflow,
+  Database,
+  ShieldCheck,
+  GitBranch,
+  Gauge,
+  CloudCog,
+} from "lucide-react";
 
 export default function App() {
   return (
@@ -30,6 +39,13 @@ export default function App() {
           <Rocket className="h-5 w-5"></Rocket>
           <Bell className="h-5 w-5"></Bell>
         </p>
+
+        {/* Buttons */}
+        <div className="mt-6 flex gap-3">
+          <button className="px-5 py-2.5 rounded-xl bg-indigo-500/20 border border-indigo-400/40 hover:bg-indigo-500/30 transition">
+            Projekt anfragen
+          </button>
+        </div>
 
         <section className="px-6 py-32 max-w-3xl mx-auto text-center space-y-12">
           <motion.h2

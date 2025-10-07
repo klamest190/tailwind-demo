@@ -1,26 +1,39 @@
 import Navbar from "./components/Navbar";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import {
-  Bell,
   Rocket,
-  Workflow,
+  Bell,
   Database,
   ShieldCheck,
+  Workflow,
   GitBranch,
-  Gauge,
   CloudCog,
+  Gauge,
 } from "lucide-react";
 
 export default function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 20,
+    mass: 0.2,
+  });
+
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-100">
-      {/* Top-Navbar */}
+    <div className="min-h-screen bg-gray-950 text-gray-100 relative overflow-x-hidden">
+      {/* Scroll Progress Bar */}
+      <motion.div
+        style={{ scaleX }}
+        className="fixed left-0 top-0 h-1 w-full origin-left bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 z-40"
+      />
+
+      {/* Navbar */}
       <Navbar />
 
-      {/* Main-Content */}
+      {/* Hero Section */}
       <main
         id="content"
-        className="px-6 pt-20 min-h-[80vh] flex flex-col items-center justify-center text-center"
+        className="px-6 pt-24 min-h-[60vh] flex flex-col items-center justify-center text-center"
       >
         <motion.h1
           initial={{ opacity: 0, y: 8 }}
@@ -36,8 +49,8 @@ export default function App() {
         <p className="text-gray-400 text-lg flex items-center gap-2">
           Low-Code, der wirkt: Skalierbare Integrationen & Compliance-Apps in
           Mendix
-          <Rocket className="h-5 w-5"></Rocket>
-          <Bell className="h-5 w-5"></Bell>
+          <Rocket className="h-5 w-5" />
+          <Bell className="h-5 w-5" />
         </p>
 
         {/* Buttons */}
@@ -45,122 +58,138 @@ export default function App() {
           <button className="px-5 py-2.5 rounded-xl bg-indigo-500/20 border border-indigo-400/40 hover:bg-indigo-500/30 transition">
             Projekt anfragen
           </button>
+          <button className="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition">
+            Demo ansehen
+          </button>
         </div>
 
-        <section className="px-6 py-32 max-w-3xl mx-auto text-center space-y-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="text-3xl md:text-4xl font-semibold text-indigo-300"
-          >
-            Moderne Mendix-Lösungen für Compliance, ERP-Anbindung & Datenflüsse
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="text-gray-400 leading-relaxed text-lg"
-          >
-            Wir planen, bauen und betreiben Mendix-Applikationen, die Ihre
-            Geschäftsprozesse messbar schneller machen. Ob
-            REST/SOAP-Schnittstellen, JSON/XML-Mappings, OAuth2/Signaturen oder
-            saubere Domain-Modelle – wir liefern robuste Implementierungen mit
-            klarer Fehlerbehandlung und nachvollziehbarem Logging für Audit &
-            Betrieb.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="text-gray-400 leading-relaxed text-lg"
-          >
-            Daten in Bewegung: Wir orchestrieren große Importe (z. B. 20 000
-            Artikel) mit 500er-Batching, TaskQueue-Verarbeitung,
-            Staging-Entities und performanten OQL-Abfragen. Ergebnis: Stabiler
-            Durchsatz, kurze Antwortzeiten und keine „Big-Commit“-Risiken –
-            inklusive Monitoring für Durchlaufzeiten und Fehlerraten.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="text-gray-400 leading-relaxed text-lg"
-          >
-            Compliance by Design: EUDR (DDS), REACH, RoHS, SCIP, ELV – wir
-            modellieren Stammdaten, BOM-Strukturen und Meldeobjekte so, dass
-            UUIDs, Digests und Referenzen konsistent bleiben. Von
-            Artikel-/Lieferanten-/BOM-Importen bis zur API-Kommunikation mit
-            Behörden- oder OEM-Systemen: revisionssicher, testbar und
-            mandantenfähig.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="text-gray-400 leading-relaxed text-lg"
-          >
-            Integration Patterns, die halten: Synchron/asynchron, Webhooks,
-            Retries mit Backoff, Idempotenz-Keys, Statuscodes (201/207/422) und
-            saubere Fehlerpfade. Wir binden ERP/PLM (z. B. SAP/Zeiss-ERP) an,
-            normalisieren Daten und liefern klare Mappings – wartbar,
-            dokumentiert und CI-fähig.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="text-gray-400 leading-relaxed text-lg"
-          >
-            Nutzerzentriert & sicher: Rollenbasierte Oberflächen, responsive
-            Seiten, Audit-Trails und granulare Rechte gehören zum Standard.
-            Dashboards zeigen den Fluss: Queue-Backlogs, Batch-Durchsatz,
-            SLA-Erfüllung und Fehlertypen – damit Betrieb & Fachbereich die
-            gleiche Sprache sprechen.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="text-gray-400 leading-relaxed text-lg"
-          >
-            Zukunftssichere Architektur: Unsere Anwendungen basieren auf klar
-            getrennten Modulen, stabilen Domain-Schichten und konfigurierbaren
-            REST-Endpunkten. Durch Logging, Retry-Mechanismen und
-            Queue-Governance bleibt die Integrität auch bei hohen Datenmengen
-            erhalten. Wir denken in Skalierbarkeit – von lokalem Pilot bis
-            Enterprise-Deployment in der Cloud.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            className="text-gray-400 leading-relaxed text-lg"
-          >
-            Partnerschaftlich & pragmatisch: Wir verstehen Fachbereiche, aber
-            denken wie Entwickler. Ob Zeiss, Continental oder Mittelstand –
-            unsere Lösungen entstehen im Dialog, mit Fokus auf nachhaltigem
-            Nutzen. Unser Ziel ist nicht nur Software, sondern ein System, das
-            Ihr Team versteht, trägt und weiterentwickelt – auch in fünf Jahren
-            noch stabil und performant.
-          </motion.p>
-        </section>
+        <div className="mt-16 h-px w-32 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       </main>
+
+      {/* Content Section */}
+      <section className="px-6 py-24 max-w-3xl mx-auto text-left space-y-20">
+        {/* Abschnitt 1 */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="flex flex-col items-start gap-4"
+        >
+          <Database className="h-14 w-14 text-indigo-400" />
+          <h2 className="text-3xl font-semibold text-indigo-300">
+            Skalierbare Datenflüsse
+          </h2>
+          <p className="text-gray-400 text-lg leading-relaxed">
+            Wir orchestrieren große Importe (z. B. 20 000 Artikel) mit
+            500er-Batching, TaskQueue-Verarbeitung, Staging-Entities und
+            performanten OQL-Abfragen. Stabiler Durchsatz, kurze Antwortzeiten –
+            inklusive Monitoring für Durchlaufzeiten und Fehlerraten.
+          </p>
+        </motion.div>
+
+        {/* Abschnitt 2 */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-start gap-4"
+        >
+          <ShieldCheck className="h-14 w-14 text-indigo-400" />
+          <h2 className="text-3xl font-semibold text-indigo-300">
+            Compliance by Design
+          </h2>
+          <p className="text-gray-400 text-lg leading-relaxed">
+            EUDR (DDS), REACH, RoHS, SCIP, ELV: Wir modellieren Stammdaten und
+            BOM-Strukturen so, dass UUIDs, Digests und Referenzen konsistent
+            bleiben. Von Artikel-/Lieferanten-/BOM-Importen bis zur
+            API-Kommunikation mit Behörden- oder OEM-Systemen – revisionssicher,
+            testbar und mandantenfähig.
+          </p>
+        </motion.div>
+
+        {/* Abschnitt 3 */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-start gap-4"
+        >
+          <Workflow className="h-14 w-14 text-indigo-400" />
+          <h2 className="text-3xl font-semibold text-indigo-300">
+            Integration Patterns, die halten
+          </h2>
+          <p className="text-gray-400 text-lg leading-relaxed">
+            Synchron/asynchron, Webhooks, Retries mit Backoff, Idempotenz-Keys
+            und klare Statuscodes. Wir binden ERP/PLM-Systeme (z. B.
+            SAP/Zeiss-ERP) an, normalisieren Daten und liefern CI-fähige,
+            wartbare Mappings.
+          </p>
+        </motion.div>
+
+        {/* Abschnitt 4 */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-start gap-4"
+        >
+          <GitBranch className="h-14 w-14 text-indigo-400" />
+          <h2 className="text-3xl font-semibold text-indigo-300">
+            Nutzerzentriert & sicher
+          </h2>
+          <p className="text-gray-400 text-lg leading-relaxed">
+            Rollenbasierte Oberflächen, responsive Seiten, Audit-Trails und
+            granulare Rechte gehören zum Standard. Dashboards zeigen den Fluss:
+            Queue-Backlogs, Batch-Durchsatz, SLA-Erfüllung und Fehlertypen –
+            damit Betrieb und Fachbereich die gleiche Sprache sprechen.
+          </p>
+        </motion.div>
+
+        {/* Abschnitt 5 */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-start gap-4"
+        >
+          <CloudCog className="h-14 w-14 text-indigo-400" />
+          <h2 className="text-3xl font-semibold text-indigo-300">
+            Zukunftssichere Architektur
+          </h2>
+          <p className="text-gray-400 text-lg leading-relaxed">
+            Unsere Anwendungen basieren auf klar getrennten Modulen, stabilen
+            Domain-Schichten und konfigurierbaren REST-Endpunkten. Logging,
+            Retry-Mechanismen und Queue-Governance sichern Integrität – von
+            lokalem Pilot bis Enterprise-Cloud.
+          </p>
+        </motion.div>
+
+        {/* Abschnitt 6 */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.5 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-start gap-4"
+        >
+          <Gauge className="h-14 w-14 text-indigo-400" />
+          <h2 className="text-3xl font-semibold text-indigo-300">
+            Partnerschaftlich & pragmatisch
+          </h2>
+          <p className="text-gray-400 text-lg leading-relaxed">
+            Wir verstehen Fachbereiche, denken wie Entwickler. Ob Zeiss,
+            Continental oder Mittelstand – unsere Lösungen entstehen im Dialog
+            mit Fokus auf nachhaltigem Nutzen. Ziel: Ein System, das Ihr Team
+            versteht, trägt und weiterentwickelt – auch in fünf Jahren noch
+            performant.
+          </p>
+        </motion.div>
+      </section>
     </div>
   );
 }

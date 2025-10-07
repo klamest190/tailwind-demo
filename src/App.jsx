@@ -9,6 +9,7 @@ import {
   GitBranch,
   CloudCog,
   Gauge,
+  Globe,
 } from "lucide-react";
 
 export default function App() {
@@ -187,6 +188,27 @@ export default function App() {
             mit Fokus auf nachhaltigem Nutzen. Ziel: Ein System, das Ihr Team
             versteht, trägt und weiterentwickelt – auch in fünf Jahren noch
             performant.
+          </p>
+        </motion.div>
+
+        {/* Abschnitt 7 */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.5 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-start gap-4"
+        >
+          <Globe className="h-14 w-14 text-indigo-400" />
+          <h2 className="text-3xl font-semibold text-indigo-300">
+            Vernetzt denken, nachhaltig handeln
+          </h2>
+          <p className="text-gray-400 text-lg leading-relaxed">
+            Digitalisierung endet nicht an Landesgrenzen. Wir entwickeln
+            Mendix-Lösungen, die international skalieren – mit Fokus auf
+            Datenintegrität, Transparenz und nachhaltige Lieferketten. Von
+            europäischen EUDR-Pflichten bis zu globalen Partner-APIs: wir
+            verbinden Technologie und Verantwortung.
           </p>
         </motion.div>
       </section>

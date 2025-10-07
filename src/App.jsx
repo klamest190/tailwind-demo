@@ -12,6 +12,14 @@ import {
   Globe,
 } from "lucide-react";
 
+// Progress-Balken hier lokal berechnen
+const { scrollYProgress } = useScroll();
+const scaleX = useSpring(scrollYProgress, {
+  stiffness: 120,
+  damping: 20,
+  mass: 0.2,
+});
+
 export default function App() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -22,19 +30,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100 relative overflow-x-hidden">
-      {/* Scroll Progress Bar */}
-      <motion.div
-        style={{ scaleX }}
-        className="fixed left-0 top-0 h-1 w-full origin-left bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 z-40"
-      />
-
       {/* Navbar */}
       <Navbar />
+
+      {/* Spacer, damit der fixed-Header nichts überlappt */}
+      <div className="h-14" aria-hidden />
 
       {/* Hero Section */}
       <main
         id="content"
-        className="px-6 pt-24 min-h-[60vh] flex flex-col items-center justify-center text-center"
+        className="px-6 pt-10 min-h-[60vh] flex flex-col items-center justify-center text-center"
       >
         <motion.h1
           initial={{ opacity: 0, y: 8 }}
@@ -212,6 +217,13 @@ export default function App() {
           </p>
         </motion.div>
       </section>
+
+      <motion.div
+        style={{ scaleX }}
+        className="fixed inset-x-0 bottom-0 h-[2px] origin-left
+             bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400
+             z-50 pointer-events-none"
+      />
     </div>
   );
 }

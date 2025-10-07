@@ -63,11 +63,11 @@ export default function App() {
           </button>
         </div>
 
-        <div className="mt-16 h-px w-32 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+        <div className="mt-6 h-px w-24 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
       </main>
 
       {/* Content Section */}
-      <section className="px-6 py-24 max-w-3xl mx-auto text-left space-y-20">
+      <section className="px-6 pt-8 pb-20 max-w-3xl mx-auto text-left space-y-16">
         {/* Abschnitt 1 */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}

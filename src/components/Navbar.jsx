@@ -13,6 +13,7 @@ const links = [
   { href: "#pricing", label: "Preise" },
   { href: "#contact", label: "Kontakt" },
   { href: "#dashboard", label: "Dashboard" },
+  { href: "#dashboard", label: "Gaming" },
 ];
 
 export default function Navbar() {
